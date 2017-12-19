@@ -14,13 +14,20 @@ const controls = [
 const buildControls = props => {
   const arrayControls = controls.map(control => (
     <BuildControl
+      added={() => props.ingredientAdded(control.type)}
+      removed={() => props.ingredientRemoved(control.type)}
       key={control.label}
       label={control.label}
-      type={control.type}
+      disabled={props.disabled[control.type]}
     />
   ));
 
-  return <div className={classes.BuildControls}>{arrayControls}</div>;
+  return (
+    <div className={classes.BuildControls}>
+      <p>Current Price : {props.price}</p>
+      {arrayControls}
+    </div>
+  );
 };
 
 export default buildControls;
